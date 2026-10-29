@@ -397,9 +397,74 @@ a {
   margin-top: 2rem
 }
 
-.why>div {
+/* ── Why card – animated ─────────────────────────────────── */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px)
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0)
+  }
+}
+
+.why-card {
+  position: relative;
   border-top: 3px solid var(--gold);
-  padding-top: .5rem
+  padding: 1.75rem 1.25rem 1.5rem;
+  background: rgba(255, 255, 255, .04);
+  overflow: hidden;
+  /* start hidden for scroll animation */
+  opacity: 0;
+  transform: translateY(28px);
+  transition: box-shadow .3s
+}
+
+.why-card.in-view {
+  animation: fadeUp .55s ease both
+}
+
+.why-card:nth-child(1) {
+  animation-delay: .05s
+}
+
+.why-card:nth-child(2) {
+  animation-delay: .18s
+}
+
+.why-card:nth-child(3) {
+  animation-delay: .31s
+}
+
+.why-card:nth-child(4) {
+  animation-delay: .44s
+}
+
+.why-card:hover {
+  box-shadow: 0 0 0 1px rgba(201, 162, 75, .35), 0 6px 24px rgba(0, 0, 0, .25)
+}
+
+.why-num {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: rgba(201, 162, 75, .18);
+  letter-spacing: -.04em;
+  margin-bottom: .5rem;
+  transition: color .3s
+}
+
+.why-card:hover .why-num {
+  color: rgba(201, 162, 75, .42)
+}
+
+.why-card h3 {
+  color: var(--white);
+  margin-top: .25rem
 }
 
 .why p {
