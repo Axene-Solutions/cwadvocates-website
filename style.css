@@ -745,3 +745,176 @@ a {
     transition: none !important
   }
 }
+
+/* article pages */
+.art-hero {
+  background: var(--navy);
+  color: var(--white);
+  padding: 3.5rem 0 3rem;
+  border-bottom: 4px solid var(--gold)
+}
+
+.art-hero h1 {
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  max-width: 24ch;
+  margin: .5rem 0 1rem
+}
+
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  font-size: .9rem;
+  color: #DCE3F0;
+  margin-bottom: 1.5rem
+}
+
+.breadcrumb a {
+  color: var(--goldl)
+}
+
+.art-tag {
+  color: var(--goldl);
+  font-weight: 600;
+  font-size: .95rem
+}
+
+.art-meta {
+  color: #DCE3F0;
+  margin-bottom: 1.5rem
+}
+
+.art-ssrn-btn {
+  margin-top: .25rem
+}
+
+.art-body {
+  padding: 4rem 0 5rem
+}
+
+.art-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 4rem;
+  align-items: start
+}
+
+.art-content {
+  max-width: 72ch
+}
+
+.art-content h2 {
+  font-size: 2rem;
+  margin: 2.5rem 0 .75rem;
+  color: var(--navy)
+}
+
+.art-content h2:first-child {
+  margin-top: 0
+}
+
+.art-content p {
+  margin-bottom: 1.1rem;
+  font-size: 1.08rem;
+  max-width: none
+}
+
+.art-content blockquote {
+  border-left: 4px solid var(--gold);
+  background: var(--mist);
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0
+}
+
+.art-content blockquote p {
+  margin: 0
+}
+
+.art-content sup {
+  font-size: .7em;
+  line-height: 0;
+  color: var(--gold);
+  font-weight: 600
+}
+
+.art-content a:not(.btn) {
+  color: var(--navy);
+  text-decoration-color: var(--gold);
+  text-underline-offset: 3px
+}
+
+.art-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 3rem
+}
+
+.art-footnotes {
+  border-top: 1px solid #C9CFDB;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  font-size: .9rem;
+  color: var(--muted)
+}
+
+.art-footnotes h3 {
+  font-size: 1.4rem;
+  margin: 0 0 .75rem
+}
+
+.art-footnotes ol {
+  padding-left: 1.5rem
+}
+
+.art-footnotes li {
+  margin-bottom: .4rem
+}
+
+.art-sidebar {
+  display: grid;
+  gap: 1.25rem;
+  position: sticky;
+  top: 96px
+}
+
+.art-sidebar-card {
+  background: var(--mist);
+  border-top: 4px solid var(--gold);
+  padding: 1.25rem
+}
+
+.art-sidebar-card h3 {
+  font-size: 1.3rem;
+  margin: 0 0 .5rem
+}
+
+.art-sidebar-card p {
+  margin: 0;
+  font-size: .98rem
+}
+
+.art-sidebar-card a:not(.btn) {
+  color: var(--navy);
+  text-decoration-color: var(--gold);
+  text-underline-offset: 3px
+}
+
+.art-related {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: .75rem
+}
+
+@media (max-width:900px) {
+  .art-wrap {
+    grid-template-columns: 1fr;
+    gap: 2.5rem
+  }
+
+  .art-sidebar {
+    position: static
+  }
+}
