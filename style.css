@@ -918,3 +918,139 @@ a {
     position: static
   }
 }
+
+.form .check {
+  display: flex;
+  gap: .6rem;
+  align-items: flex-start;
+  font-weight: 400;
+  font-size: .95rem
+}
+
+.form .check input {
+  width: auto;
+  margin-top: .4rem
+}
+
+.form .check a {
+  color: var(--goldl)
+}
+
+.foot a {
+  color: var(--goldl)
+}
+
+.reviews {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  align-items: start
+}
+
+.review {
+  background: var(--white);
+  border: 1px solid #D6DBE6;
+  border-top: 4px solid var(--gold);
+  padding: 1.5rem
+}
+
+.review-head {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin-bottom: .75rem
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: var(--goldl);
+  display: grid;
+  place-items: center;
+  font: 600 1.2rem 'Cormorant Garamond', serif
+}
+
+.review-head strong {
+  display: block;
+  line-height: 1.2
+}
+
+.review-head small {
+  color: var(--muted)
+}
+
+.stars {
+  color: var(--gold);
+  letter-spacing: .1em;
+  font-size: 1.15rem;
+  margin-bottom: .5rem
+}
+
+.stars .off {
+  color: #C9CFDB
+}
+
+.chats {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  margin-top: 3rem;
+  padding: 2.5rem;
+  background: var(--navy);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem
+}
+
+.chats::before,
+.chats::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  filter: blur(50px)
+}
+
+.chats::before {
+  width: 280px;
+  height: 280px;
+  background: rgba(201, 162, 75, .45);
+  top: -80px;
+  left: -60px
+}
+
+.chats::after {
+  width: 320px;
+  height: 320px;
+  background: rgba(66, 110, 190, .45);
+  bottom: -100px;
+  right: -80px
+}
+
+.chat {
+  background: rgba(255, 255, 255, .12);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: 18px 18px 18px 4px;
+  padding: 1.25rem 1.5rem;
+  color: var(--white)
+}
+
+.chat p {
+  margin-bottom: .75rem
+}
+
+.chat span {
+  display: block;
+  font-size: .85rem;
+  color: var(--goldl)
+}
+
+@media (max-width:600px) {
+  .chats {
+    padding: 1.5rem
+  }
+}
