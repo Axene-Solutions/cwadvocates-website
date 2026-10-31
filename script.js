@@ -127,3 +127,21 @@ if (whyCards.length && 'IntersectionObserver' in window) {
   // Fallback: show cards immediately if IntersectionObserver not supported
   whyCards.forEach(card => card.classList.add('in-view'));
 }
+
+// Scroll-triggered reveal for the client reviews and chat bubbles.
+// style.css hides .review/.chat (opacity: 0) until they get the "in" class.
+const reviewCards = document.querySelectorAll('.review, .chat');
+reviewCards.forEach((card, i) => card.style.setProperty('--d', (i % 3) * 0.12 + 's'));
+if (reviewCards.length && 'IntersectionObserver' in window) {
+  const reviewObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        reviewObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  reviewCards.forEach(card => reviewObs.observe(card));
+} else {
+  reviewCards.forEach(card => card.classList.add('in'));
+}
