@@ -1190,3 +1190,12 @@ a {
     animation: none
   }
 }
+
+/*Gallery hidden for now. Delete THESE TWO LILNSE TO SHOW IT AGAIN. */
+#gallery {
+  display: none
+}
+
+.nav a[href$="gallery"] {
+  display: none
+}
