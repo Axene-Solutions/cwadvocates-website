@@ -1199,3 +1199,37 @@ a {
 .nav a[href$="gallery"] {
   display: none
 }
+
+.foot {
+  padding-bottom: 5.5rem
+}
+
+.made-by {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: .55rem;
+  margin-top: 1rem;
+  font-size: .85rem;
+  text-decoration: none
+}
+
+.foot a.made-by {
+  color: #B8C2D6
+}
+
+.foot a.made-by:hover {
+  color: #fff
+}
+
+.made-by img {
+  height: 22px;
+  width: auto;
+  opacity: .9;
+  transition: opacity .2s, transform .2s
+}
+
+.made-by:hover img {
+  opacity: 1;
+  transform: rotate(-6deg)
+}
