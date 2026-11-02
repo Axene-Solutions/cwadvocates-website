@@ -1202,7 +1202,6 @@ a {
 
 /* compact footer */
 .foot {
-  position: relative;
   padding: 1.25rem 0;
   font-size: .85rem
 }
@@ -1217,22 +1216,13 @@ a {
   margin-top: .2rem
 }
 
-.foot .wrap:last-child {
-  position: absolute;
-  top: 1.25rem;
-  left: 0;
-  right: 0;
-  pointer-events: none
-}
-
 .made-by {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: flex-end;
   gap: .5rem;
+  margin-top: .75rem;
   font-size: .8rem;
-  text-decoration: none;
-  pointer-events: auto
+  text-decoration: none
 }
 
 .foot a.made-by {
@@ -1258,10 +1248,5 @@ a {
 @media (max-width:700px) {
   .foot {
     padding-bottom: 4.75rem
-  }
-
-  .foot .wrap:last-child {
-    position: static;
-    margin-top: .75rem
   }
 }
