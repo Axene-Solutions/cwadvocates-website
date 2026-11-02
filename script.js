@@ -94,7 +94,8 @@ const AREAS = [
 const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
 
 // Render practice area cards with links to individual pages
-document.getElementById('areas').innerHTML = AREAS.map(a =>
+const areasEl = document.getElementById('areas');
+if (areasEl) areasEl.innerHTML = AREAS.map(a =>
   `<a class="area-card" href="practice-areas/${a.slug}.html">
     <b>${esc(a.name)}</b>
     <span>${esc(a.short)}</span>
@@ -103,13 +104,17 @@ document.getElementById('areas').innerHTML = AREAS.map(a =>
 ).join('');
 
 // Populate the contact form select
-document.getElementById('subject').innerHTML = '<option value="">Select a practice area</option>' +
+const subjectEl = document.getElementById('subject');
+if (subjectEl) subjectEl.innerHTML = '<option value="">Select a practice area</option>' +
   AREAS.map(a => `<option>${esc(a.name)}</option>`).join('') + '<option>Other</option>';
 
-document.getElementById('yr').textContent = new Date().getFullYear();
+const yrEl = document.getElementById('yr');
+if (yrEl) yrEl.textContent = new Date().getFullYear();
 const btn = document.querySelector('.menu-btn'), nav = document.getElementById('nav');
-btn.addEventListener('click', () => btn.setAttribute('aria-expanded', nav.classList.toggle('open')));
-nav.addEventListener('click', e => { if (e.target.tagName === 'A') { nav.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); } });
+if (btn && nav) {
+  btn.addEventListener('click', () => btn.setAttribute('aria-expanded', nav.classList.toggle('open')));
+  nav.addEventListener('click', e => { if (e.target.tagName === 'A') { nav.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); } });
+}
 
 // Scroll-triggered animation for "Why work with us" cards
 const whyCards = document.querySelectorAll('[data-why]');
@@ -144,4 +149,13 @@ if (reviewCards.length && 'IntersectionObserver' in window) {
   reviewCards.forEach(card => reviewObs.observe(card));
 } else {
   reviewCards.forEach(card => card.classList.add('in'));
+}
+
+// Make sure "Home" is the first item in the header nav on every page.
+if (nav && !nav.querySelector('[data-home]') && !Array.from(nav.querySelectorAll('a')).some(a => a.textContent.trim() === 'Home')) {
+  const home = document.createElement('a');
+  home.textContent = 'Home';
+  home.href = '/';
+  home.setAttribute('data-home', '');
+  nav.insertBefore(home, nav.firstChild);
 }
