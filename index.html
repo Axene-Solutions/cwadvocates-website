@@ -282,17 +282,185 @@
             <li><strong>Hours</strong>Monday to Friday, 8:00 to 17:00</li>
           </ul>
         </div>
-        <form class="form" action="https://formspree.io/f/mrpplnpl" method="POST">
-          <label>Name<input name="name" required autocomplete="name"></label>
-          <label>Email<input type="email" name="email" required autocomplete="email"></label>
-          <label>Phone<input type="tel" name="phone" autocomplete="tel"></label>
-          <label>Practice area<select name="practice_area" id="subject"></select></label>
-          <label>Message<textarea name="message" rows="5" required></textarea></label>
-          <label class="check"><input type="checkbox" name="privacy_consent" required> <span>I have read the <a
-                href="privacy.html">Privacy Notice</a> and agree that C&amp;W Advocates may use these details to respond
-              to my enquiry.</span></label>
-          <button class="btn btn-gold" type="submit">Send message</button>
-        </form>
+        <div class="consult-wizard-container">
+          <form class="consult-wizard" id="consult-wizard" action="https://formspree.io/f/mrpplnpl" method="POST">
+            <!-- Hidden inputs for Formspree email notification to advocates -->
+            <input type="hidden" name="_subject" id="wizard-form-subject" value="New Legal Consultation Request">
+            <input type="hidden" name="practice_area" id="hidden-practice-area" value="">
+            <input type="hidden" name="preferred_contact" id="hidden-preferred-contact" value="WhatsApp">
+            <input type="hidden" name="whatsapp_direct_link" id="hidden-wa-link" value="">
+
+            <!-- Header: Progress bar and step indicator -->
+            <div class="wizard-header">
+              <div class="wizard-meta">
+                <span class="wizard-step-tag" id="wizard-step-tag">Question 1 of 4</span>
+                <span class="wizard-step-name" id="wizard-step-name">Practice Area</span>
+              </div>
+              <div class="wizard-progress-track">
+                <div class="wizard-progress-bar" id="wizard-progress-bar" style="width: 25%;"></div>
+              </div>
+            </div>
+
+            <!-- STEP 1: What do you need help with? -->
+            <div class="wizard-step active" data-step="1">
+              <div class="wizard-step-body">
+                <span class="wizard-kicker">Step 1</span>
+                <h3 class="wizard-heading">What do you need legal guidance with?</h3>
+                <p class="wizard-desc">Select the practice area that best matches your situation:</p>
+                
+                <div class="wizard-areas-grid" id="wizard-areas-grid">
+                  <!-- Populated and managed dynamically by script.js -->
+                </div>
+              </div>
+              <div class="wizard-footer">
+                <span class="wizard-hint">Click an area to proceed</span>
+                <button type="button" class="btn btn-gold wizard-btn-next" id="step1-next" disabled>Continue &rarr;</button>
+              </div>
+            </div>
+
+            <!-- STEP 2: Tell us a bit about your matter -->
+            <div class="wizard-step" data-step="2">
+              <div class="wizard-step-body">
+                <span class="wizard-kicker">Step 2</span>
+                <h3 class="wizard-heading">Tell us a bit about your matter</h3>
+                <p class="wizard-desc">A brief overview helps our partners prepare for your consultation:</p>
+                
+                <div class="wizard-input-wrap">
+                  <textarea name="message" id="wizard-message" rows="4" placeholder="Briefly describe your situation, goals, or any upcoming deadlines..." required></textarea>
+                </div>
+
+                <div class="wizard-tags-label" id="wizard-tags-label">Quick topics (click to add):</div>
+                <div class="wizard-tags" id="wizard-quick-tags">
+                  <button type="button" class="wizard-tag" data-tag="Contract drafting and review">Contract review</button>
+                  <button type="button" class="wizard-tag" data-tag="Company registration and corporate structuring">Company setup</button>
+                  <button type="button" class="wizard-tag" data-tag="Commercial dispute or court representation">Dispute / litigation</button>
+                  <button type="button" class="wizard-tag" data-tag="Property purchase, lease or title transfer">Property matter</button>
+                  <button type="button" class="wizard-tag" data-tag="Urgent regulatory or legal compliance">Urgent advisory</button>
+                </div>
+
+                <div class="wizard-confidential-note">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                  <span>Protected by Advocate-Client Privilege · Strictly confidential</span>
+                </div>
+              </div>
+              <div class="wizard-footer">
+                <button type="button" class="btn btn-line wizard-btn-prev">&larr; Back</button>
+                <button type="button" class="btn btn-gold wizard-btn-next" id="step2-next">Continue &rarr;</button>
+              </div>
+            </div>
+
+            <!-- STEP 3: How can we reach you? -->
+            <div class="wizard-step" data-step="3">
+              <div class="wizard-step-body">
+                <span class="wizard-kicker">Step 3</span>
+                <h3 class="wizard-heading">How can we reach you?</h3>
+                <p class="wizard-desc">Choose your preferred channel for the advocate to respond:</p>
+                
+                <div class="wizard-channels-grid">
+                  <div class="wizard-channel-option selected" data-channel="WhatsApp">
+                    <div class="channel-indicator"></div>
+                    <div class="channel-icon-wrap wa-accent">
+                      <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                    </div>
+                    <div class="channel-copy">
+                      <div class="channel-topline">
+                        <strong>WhatsApp</strong>
+                        <span class="channel-badge">Fastest response</span>
+                      </div>
+                      <p>Direct chat on WhatsApp with one of our advocates.</p>
+                    </div>
+                  </div>
+
+                  <div class="wizard-channel-option" data-channel="Email">
+                    <div class="channel-indicator"></div>
+                    <div class="channel-icon-wrap email-accent">
+                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    </div>
+                    <div class="channel-copy">
+                      <div class="channel-topline">
+                        <strong>Email</strong>
+                      </div>
+                      <p>Detailed written consultation overview sent to your inbox.</p>
+                    </div>
+                  </div>
+
+                  <div class="wizard-channel-option" data-channel="Phone Call">
+                    <div class="channel-indicator"></div>
+                    <div class="channel-icon-wrap phone-accent">
+                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                    </div>
+                    <div class="channel-copy">
+                      <div class="channel-topline">
+                        <strong>Phone Call</strong>
+                      </div>
+                      <p>Direct phone conversation during office hours (Mon–Fri).</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="wizard-footer">
+                <button type="button" class="btn btn-line wizard-btn-prev">&larr; Back</button>
+                <button type="button" class="btn btn-gold wizard-btn-next">Continue &rarr;</button>
+              </div>
+            </div>
+
+            <!-- STEP 4: Your Details -->
+            <div class="wizard-step" data-step="4">
+              <div class="wizard-step-body">
+                <span class="wizard-kicker">Final Step</span>
+                <h3 class="wizard-heading" id="step4-heading">Where should we reach you?</h3>
+                <p class="wizard-desc">Provide your contact details so our advocates can review and get in touch:</p>
+
+                <div class="wizard-fields-grid">
+                  <label class="wizard-field-item">
+                    <span>Full name <strong class="req">*</strong></span>
+                    <input type="text" name="name" id="wizard-name" required placeholder="e.g. Jane Doe" autocomplete="name">
+                  </label>
+
+                  <label class="wizard-field-item" id="field-phone-item">
+                    <span id="field-phone-label">WhatsApp Number <strong class="req">*</strong></span>
+                    <input type="tel" name="phone" id="wizard-phone" required placeholder="+254 7XX XXX XXX" autocomplete="tel">
+                  </label>
+
+                  <label class="wizard-field-item" id="field-email-item">
+                    <span id="field-email-label">Email address <strong class="req">*</strong></span>
+                    <input type="email" name="email" id="wizard-email" required placeholder="jane@example.com" autocomplete="email">
+                  </label>
+
+                  <label class="check wizard-check">
+                    <input type="checkbox" name="privacy_consent" id="wizard-consent" required checked>
+                    <span>I have read the <a href="privacy.html" target="_blank" rel="noopener">Privacy Notice</a> and agree that C&amp;W Advocates may use these details to respond to my enquiry.</span>
+                  </label>
+                </div>
+              </div>
+              <div class="wizard-footer">
+                <button type="button" class="btn btn-line wizard-btn-prev">&larr; Back</button>
+                <button type="submit" class="btn btn-gold wizard-btn-submit" id="wizard-submit-btn">
+                  <span>Book Consultation &rarr;</span>
+                </button>
+              </div>
+              <div class="wizard-alert-msg" id="wizard-alert-msg" style="display:none;"></div>
+            </div>
+
+            <!-- SUCCESS STATE -->
+            <div class="wizard-success-card" id="wizard-success-card" style="display:none;">
+              <div class="success-icon-badge">
+                <svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+              </div>
+              <h3 class="success-title">Consultation Request Received!</h3>
+              <p class="success-body" id="success-body-text">Thank you! An email notification has been dispatched to our senior partners. Trevis Njoroge Wamwiri or Wantahe Elijah Chacha will review your enquiry and reach out within one business day.</p>
+              
+              <div class="success-wa-box" id="success-wa-box">
+                <p class="success-wa-prompt">Need an immediate answer?</p>
+                <a class="btn btn-gold success-wa-btn" id="success-wa-btn" href="#" target="_blank" rel="noopener">
+                  <span>Chat directly on WhatsApp now &rarr;</span>
+                </a>
+              </div>
+
+              <button type="button" class="wizard-reset-btn" id="wizard-reset-btn">&larr; Submit another enquiry</button>
+            </div>
+          </form>
+        </div>
       </div>
     </section>
   </main>
