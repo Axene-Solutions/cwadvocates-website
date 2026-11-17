@@ -535,8 +535,33 @@ a {
   object-fit: cover
 }
 
+.person {
+  background: var(--white);
+  border: 1px solid #D6DBE6;
+  border-top: 4px solid var(--gold);
+  padding: 1.75rem 1.5rem;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.person:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(11, 29, 58, .08);
+}
+
 .person h3 {
-  margin-top: 1rem
+  margin-top: 0;
+  font-size: 1.35rem;
+  color: var(--navy);
+}
+
+.person p {
+  margin-top: 0.35rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.person p strong {
+  color: var(--navy);
 }
 
 .ph img {
